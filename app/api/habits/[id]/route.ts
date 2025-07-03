@@ -18,7 +18,7 @@ export async function DELETE(
       return NextResponse.json({error: 'Habit not found'}, {status: 404});
     }
     console.error('Error deleting habit:', error);
-    return NextResponse.json({error: 'Failed to delete habit'}, {status: 500});
+    return NextResponse.json({error: 'Failed to delete habit', details: error.message}, {status: 500});
   }
 }
 
@@ -42,6 +42,6 @@ export async function PUT(request: Request, {params}: {params: {id: string}}) {
       return NextResponse.json({error: 'Habit not found'}, {status: 404});
     }
     console.error('Error updating habit:', error);
-    return NextResponse.json({error: 'Failed to update habit'}, {status: 500});
+    return NextResponse.json({error: 'Failed to update habit', details: error.message}, {status: 500});
   }
 }

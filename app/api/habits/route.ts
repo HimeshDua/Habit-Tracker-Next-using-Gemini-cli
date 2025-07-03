@@ -34,6 +34,6 @@ export async function POST(request: Request) {
     return NextResponse.json({habit: newHabit}, {status: 201});
   } catch (error) {
     console.error('Error creating habit:', error);
-    return NextResponse.json({error: 'Failed to create habit'}, {status: 500});
+    return NextResponse.json({ error: 'Failed to create habit', details: error.message }, { status: 500 });
   }
 }

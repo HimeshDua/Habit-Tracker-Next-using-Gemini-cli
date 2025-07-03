@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import styles from '../styles/Calendar.module.css';
 
 function Calendar({ habit, onDateCompleted }) {
   const today = useMemo(() => new Date(), []);
@@ -164,30 +165,30 @@ function Calendar({ habit, onDateCompleted }) {
   const { current: currentStreak, longest: longestStreak } = calculateStreaks;
 
   return (
-    <div className="calendar">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <button className="btn btn-sm btn-outline-secondary" onClick={prevMonth}>&lt;</button>
+    <div className={styles.calendar}>
+      <div className={styles.header}>
+        <button className={styles.navButton} onClick={prevMonth}>&lt;</button>
         <h4>{currentMonthName} {currentYear}</h4>
-        <button className="btn btn-sm btn-outline-secondary" onClick={nextMonth}>&gt;</button>
+        <button className={styles.navButton} onClick={nextMonth}>&gt;</button>
       </div>
 
-      <div className="calendar-grid">
+      <div className={styles.calendarGrid}>
         {daysOfWeek.map(day => (
-          <div key={day} className="day-header">{day}</div>
+          <div key={day} className={styles.dayHeader}>{day}</div>
         ))}
         {calendarDays.map((day, index) => (
           <div
             key={index}
-            className={`day-cell ${
-              !day ? 'empty' : ''
+            className={`${styles.dayCell} ${
+              !day ? styles.empty : ''
             } ${
-              day && isCompleted(day) ? 'completed' : ''
+              day && isCompleted(day) ? styles.completed : ''
             } ${
-              day && isMissed(day) ? 'missed' : ''
+              day && isMissed(day) ? styles.missed : ''
             } ${
-              day && isToday(day) ? 'today' : ''
+              day && isToday(day) ? styles.today : ''
             } ${
-              day && !isFuture(day) ? 'clickable' : ''
+              day && !isFuture(day) ? styles.clickable : ''
             }`}
             onClick={() => day && !isFuture(day) && toggleCompletion(day)}
           >
@@ -197,68 +198,14 @@ function Calendar({ habit, onDateCompleted }) {
       </div>
 
       {missedDaysCount > 0 && (
-        <div className="alert alert-warning mt-3">
+        <div className={styles.missedAlert}>
           You missed {missedDaysCount} days for this habit!
         </div>
       )}
-      <div className="mt-3">
+      <div className={styles.streakInfo}>
         <p>Current Streak: <strong>{currentStreak} days</strong></p>
         <p>Longest Streak: <strong>{longestStreak} days</strong></p>
       </div>
-
-      <style jsx>{`
-        .calendar-grid {
-          display: grid;
-          grid-template-columns: repeat(7, 1fr);
-          gap: 5px;
-          text-align: center;
-        }
-
-        .day-header {
-          font-weight: bold;
-          padding: 5px;
-          background-color: #f0f0f0;
-          border-radius: 5px;
-        }
-
-        .day-cell {
-          padding: 10px;
-          border: 1px solid #eee;
-          border-radius: 5px;
-          cursor: default;
-          background-color: #f8f9fa;
-          transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-        }
-
-        .day-cell.clickable:hover {
-          background-color: #e9ecef;
-          cursor: pointer;
-        }
-
-        .day-cell.empty {
-          background-color: transparent;
-          border: none;
-        }
-
-        .day-cell.completed {
-          background-color: #d4edda; /* Light green */
-          border-color: #28a745;
-          color: #155724;
-        }
-
-        .day-cell.missed {
-          background-color: #f8d7da; /* Light red */
-          border-color: #dc3545;
-          color: #721c24;
-        }
-
-        .day-cell.today {
-          border: 2px solid #007bff;
-          background-color: #e0f7fa; /* Light blue */
-          color: #004085;
-          font-weight: bold;
-        }
-      `}</style>
     </div>
   );
 }

@@ -1,0 +1,135 @@
+.calendar {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h4 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.navButton {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.navButton:hover {
+  background-color: #e0e0e0;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .calendarGrid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+  .dayCell {
+    padding: 10px 5px;
+    min-height: 60px;
+    font-size: 0.8em;
+  }
+  .dayHeader {
+    padding: 8px 5px;
+    font-size: 0.8em;
+  }
+  .header h4 {
+    font-size: 1.2em;
+  }
+  .navButton {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
+
+.dayHeader {
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  color: #555;
+}
+
+.dayCell {
+  padding: 15px 10px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  cursor: default;
+  background-color: #f8f9fa;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 80px; /* Ensure consistent height */
+}
+
+.dayCell.clickable:hover {
+  background-color: #e9ecef;
+  cursor: pointer;
+}
+
+.dayCell.empty {
+  background-color: transparent;
+  border: none;
+}
+
+.dayCell.completed {
+  background-color: #d4edda; /* Light green */
+  border-color: #28a745;
+  color: #155724;
+}
+
+.dayCell.missed {
+  background-color: #f8d7da; /* Light red */
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+.dayCell.today {
+  border: 2px solid #007bff;
+  background-color: #e0f7fa; /* Light blue */
+  color: #004085;
+  font-weight: bold;
+}
+
+.missedAlert {
+  padding: 10px 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  text-align: center;
+}
+
+.streakInfo {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.streakInfo strong {
+  color: #007bff;
+}

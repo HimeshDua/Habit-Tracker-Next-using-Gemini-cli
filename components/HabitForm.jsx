@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from '../styles/HabitForm.module.css';
 
 function HabitForm({ onHabitCreated }) {
   const [newHabitName, setNewHabitName] = useState('');
@@ -28,24 +29,24 @@ function HabitForm({ onHabitCreated }) {
   };
 
   return (
-    <div className="card mb-4">
-      <div className="card-header">
+    <div className={styles.card}>
+      <div className={styles.cardHeader}>
         <h4>Create New Habit</h4>
       </div>
-      <div className="card-body">
+      <div className={styles.cardBody}>
         <form onSubmit={createHabit}>
-          <div className="mb-3">
-            <label htmlFor="habitName" className="form-label">Habit Name</label>
+          <div className={styles.formGroup}>
+            <label htmlFor="habitName" className={styles.formLabel}>Habit Name</label>
             <input
               type="text"
-              className="form-control"
+              className={styles.formControl}
               id="habitName"
               value={newHabitName}
               onChange={(e) => setNewHabitName(e.target.value)}
               required
             />
           </div>
-          <button type="submit" className="btn btn-success">Add Habit</button>
+          <button type="submit" className={`${styles.button} ${styles.success}`}>Add Habit</button>
         </form>
       </div>
     </div>
